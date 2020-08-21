@@ -7,12 +7,12 @@ import configureStore from "./configureStore";
 import "./App.css";
 import AppNavigator from "./navigator/AppNavigator";
 import ErrorBoundary from "./components/Error/ErrorBoundary";
-import { authInitialState } from "./containers/Auth/reducers";
+import { videoInitialState } from "./containers/Dashboard/reducers";
 
 const history = createBrowserHistory();
 
 const initialState: ApplicationState = {
-  auth: authInitialState,
+  video: videoInitialState,
   router: { location: history.location, action: "PUSH" },
 };
 

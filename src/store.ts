@@ -2,17 +2,17 @@ import { combineReducers, Dispatch, Action, AnyAction } from 'redux'
 import { RouterState, connectRouter } from 'connected-react-router';
 import { all, fork } from 'redux-saga/effects';
 import { History } from 'history'
-import { AuthState } from './containers/Auth/types';
-import { authReducer } from './containers/Auth/reducers';
 import { Reducer } from 'typesafe-actions';
-import { authSaga } from './containers/Auth/saga';
+import { VideoState } from './containers/Dashboard/types';
+import { videoReducer } from './containers/Dashboard/reducers';
+import { videoSaga } from './containers/Dashboard/saga';
 
 // The top-level state object.
 //
 // `connected-react-router` already injects the router state typings for us,
 // so we can ignore them here.
 export interface ApplicationState {
-  auth: AuthState;
+  video: VideoState;
   router: RouterState<History.PoorMansUnknown>
 }
 
@@ -26,7 +26,7 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 // the reducer acts on the corresponding ApplicationState property type.
 export const createRootReducer = (history: History) =>
   combineReducers({
-    auth: authReducer as Reducer<AuthState, AnyAction>,
+    video: videoReducer as Reducer<VideoState, AnyAction>,
     router: connectRouter(history)
   })
 
@@ -34,5 +34,5 @@ export const createRootReducer = (history: History) =>
 // "generator function", which you can read about here:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
 export function* rootSaga() {
-  yield all([fork(authSaga)])
+  yield all([fork(videoSaga)])
 }

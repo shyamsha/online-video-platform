@@ -1,10 +1,9 @@
 import React, { Fragment, Component, Dispatch, FC } from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
 import { connect } from "react-redux";
 import { RouteEnums } from "./RouteEnums";
 import Login from "../containers/Auth/Login/Login";
 import Dashboard from "../containers/Dashboard/Dashboard";
-
 
 interface PropsFromState {}
 
@@ -13,7 +12,7 @@ interface PropsDispatchFromState {}
 type AllProps = PropsFromState & PropsDispatchFromState;
 
 interface State {
-  hasError:boolean;
+  hasError: boolean;
 }
 
 class AppNavigator extends Component<any, any> {
@@ -32,16 +31,14 @@ class AppNavigator extends Component<any, any> {
   App: FC = () => (
     <Fragment>
       <Switch>
+        <Redirect from="/" to={`/${RouteEnums.DASHBOARD}`} exact />
         <Route path={`/${RouteEnums.DASHBOARD}`} component={Dashboard} exact />
       </Switch>
     </Fragment>
   );
 
-
   render() {
-
-    return <this.App />
-
+    return <this.App />;
   }
 }
 

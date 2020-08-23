@@ -7,6 +7,7 @@ import { push } from "connected-react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { RouteEnums } from "../../navigator/RouteEnums";
 
 interface PropsFromState {
   loading: boolean;
@@ -33,7 +34,7 @@ class Dashboard extends Component<AllProps, State> {
   render() {
     const settings = {
       dots: false,
-      infinite: false,
+      infinite: true,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 4,
@@ -72,17 +73,58 @@ class Dashboard extends Component<AllProps, State> {
     return (
       <Fragment>
         <div style={{ padding: "24px" }}>
+          <div
+            style={{
+              color: "#2F4F4F",
+              fontSize: "16px",
+              paddingBottom: "14px",
+            }}
+          >
+            STUDIO
+          </div>
           <Slider {...settings} className="dynamic">
             {this.props.video?.data.map(video => {
               if (video.video_type === "STUDIO") {
                 return (
+                  <div id="container" key={video.id} onClick={()=>this.props.onRedirect(`${RouteEnums.video}/${video.id}`,video)}>
+                    <p className="min">{video.length} min</p>
+                    <img id="image" src={video.thumbnail_url} alt="card" />
+                    <p id="text">{video.instructor.name}</p>
+                  </div>
+                );
+              }
+            })}
+          </Slider>
+          <div
+            style={{ color: "#2F4F4F", fontSize: "16px", padding: "14px 0" }}
+          >
+            MOVES
+          </div>
+          <Slider {...settings} className="dynamic">
+            {this.props.video?.data.map(video => {
+              if (video.video_type === "MOVES") {
+                return (
                   <div id="container" key={video.id}>
                     <p className="min">{video.length} min</p>
-                    <img
-                      id="image"
-                      src={video.thumbnail_url}
-                      alt="card"
-                    />
+                    <img id="image" src={video.thumbnail_url} alt="card" />
+                    <p id="text">{video.instructor.name}</p>
+                  </div>
+                );
+              }
+            })}
+          </Slider>
+          <div
+            style={{ color: "#2F4F4F", fontSize: "16px", padding: "14px 0" }}
+          >
+            LIVE +
+          </div>
+          <Slider {...settings} className="dynamic">
+            {this.props.video?.data.map(video => {
+              if (video.video_type === "LIVEPLUS") {
+                return (
+                  <div id="container" key={video.id}>
+                    <p className="min">{video.length} min</p>
+                    <img id="image" src={video.thumbnail_url} alt="card" />
                     <p id="text">{video.instructor.name}</p>
                   </div>
                 );

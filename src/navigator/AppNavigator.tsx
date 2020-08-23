@@ -5,6 +5,7 @@ import { RouteEnums } from "./RouteEnums";
 import Login from "../containers/Auth/Login/Login";
 import Dashboard from "../containers/Dashboard/Dashboard";
 import VideoApp from "../containers/Video/Video";
+import Premium from "../containers/Premium/Premium";
 
 interface PropsFromState {}
 
@@ -34,8 +35,8 @@ class AppNavigator extends Component<any, any> {
       <Switch>
         <Redirect from="/" to={`/${RouteEnums.DASHBOARD}`} exact />
         <Route path={`/${RouteEnums.DASHBOARD}`} component={Dashboard} exact />
-        <Route path={`/${RouteEnums.video}/:id`} component={VideoApp} exact />
-
+        <Route path={`/${RouteEnums.Video}/:id`} component={VideoApp} exact />
+        <Route path={`/${RouteEnums.Premium}`} component={Premium} exact />
       </Switch>
     </Fragment>
   );

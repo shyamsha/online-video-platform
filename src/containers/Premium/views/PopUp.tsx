@@ -11,6 +11,9 @@ export default function PopUp(props:Props) {
   const [email, setEmail] = useState("")
   const emailChange=(e: { target: { value: React.SetStateAction<string> } })=>{
     setEmail(e.target.value)
+    const user=[]
+    user.push(e.target.value)
+    localStorage.setItem("email",JSON.stringify(user))
   }
   return (
     <Fragment>

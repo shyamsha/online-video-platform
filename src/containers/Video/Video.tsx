@@ -37,10 +37,14 @@ class VideoApp extends Component<AllProps, State> {
   onVideoPause(duration: number) {}
 
   onVideoTimeUpdate(duration: number) {
-    if (Math.floor(duration) === 60) {
+    if (Math.floor(duration) === 6) {
       // @ts-ignore
       this.videoRef.current.props.onPause();
-      this.setState({ oneMin: true });
+      if(localStorage.getItem("email")){
+        this.setState({ oneMin: false });
+      }else{
+        this.setState({oneMin:true})
+      }
     }
   }
 
@@ -96,7 +100,7 @@ class VideoApp extends Component<AllProps, State> {
             onEnd={this.onVideoEnd.bind(this)}
           />
         </div>
-        {this.state.oneMin ? (
+        {this.state.oneMin? (
           <VideoPopUp visible={this.state.oneMin} handleOk={this.handleOk} />
         ) : null}
       </Fragment>

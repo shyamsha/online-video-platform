@@ -1,13 +1,28 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, Dispatch } from "react";
 import { Card, Col, Row, Button } from "antd";
 import styled from "styled-components";
 import PopUp from "./views/PopUp";
+import { ApplicationState } from "../../store";
+import { push } from "connected-react-router";
+import { connect } from "react-redux";
+import { RouteEnums } from "../../navigator/RouteEnums";
+
+interface PropsFromState {
+  loading: boolean;
+  errors: { video?: string };
+}
+
+interface PropsDispatchFromState {
+  onRedirect: typeof push;
+}
+
+type AllProps = PropsFromState & PropsDispatchFromState;
 
 interface State {
   isPurchase: boolean;
 }
 
-export default class Premium extends Component<State> {
+class Premium extends Component<AllProps,State> {
   state: State = {
     isPurchase: false,
   };
@@ -19,7 +34,7 @@ export default class Premium extends Component<State> {
   handleOk = () => {
     this.setState({
       isPurchase: false,
-    });
+    },()=>{this.props.onRedirect(`/${RouteEnums.DASHBOARD}`)});
   };
 
   handleCancel = () => {
@@ -115,3 +130,15 @@ const CustomRow = styled(Row)`
   align-content: center;
   width: -webkit-fill-available;
 `;
+
+const mapStateToProps: any = ({ video }: ApplicationState) => ({
+  loading: video.loading,
+  video: video.video,
+  errors: video.errors,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+  onRedirect: (route: string, state?: any) => dispatch(push(route, state)),
+});
+
+export default connect<any>(mapStateToProps, mapDispatchToProps)(Premium)

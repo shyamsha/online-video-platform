@@ -104,7 +104,7 @@ class Dashboard extends Component<AllProps, State> {
             {this.props.video?.data.map(video => {
               if (video.video_type === "MOVES") {
                 return (
-                  <div id="container" key={video.id}>
+                  <div id="container" key={video.id} onClick={()=>this.props.onRedirect(`${RouteEnums.Video}/${video.id}`,video)}>
                     <p className="min">{video.length} min</p>
                     <img id="image" src={video.thumbnail_url} alt="card" />
                     <p id="text">{video.instructor.name}</p>
@@ -122,7 +122,7 @@ class Dashboard extends Component<AllProps, State> {
             {this.props.video?.data.map(video => {
               if (video.video_type === "LIVEPLUS") {
                 return (
-                  <div id="container" key={video.id}>
+                  <div id="container" key={video.id} onClick={()=>this.props.onRedirect(`${RouteEnums.Video}/${video.id}`,video)}>
                     <p className="min">{video.length} min</p>
                     <img id="image" src={video.thumbnail_url} alt="card" />
                     <p id="text">{video.instructor.name}</p>

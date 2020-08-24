@@ -37,7 +37,7 @@ class VideoApp extends Component<AllProps, State> {
   onVideoPause(duration: number) {}
 
   onVideoTimeUpdate(duration: number) {
-    if (Math.floor(duration) === 6) {
+    if (Math.floor(duration) === 60) {
       // @ts-ignore
       this.videoRef.current.props.onPause();
       this.setState({ oneMin: true });

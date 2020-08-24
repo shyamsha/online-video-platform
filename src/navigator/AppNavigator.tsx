@@ -1,10 +1,11 @@
 import React, { Fragment, Component, Dispatch, FC } from "react";
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
 import { connect } from "react-redux";
 import { RouteEnums } from "./RouteEnums";
 import Login from "../containers/Auth/Login/Login";
-// import { ApplicationState } from "../store";
-
+import Dashboard from "../containers/Dashboard/Dashboard";
+import VideoApp from "../containers/Video/Video";
+import Premium from "../containers/Premium/Premium";
 
 interface PropsFromState {}
 
@@ -13,7 +14,7 @@ interface PropsDispatchFromState {}
 type AllProps = PropsFromState & PropsDispatchFromState;
 
 interface State {
-  hasError:boolean;
+  hasError: boolean;
 }
 
 class AppNavigator extends Component<any, any> {
@@ -32,28 +33,16 @@ class AppNavigator extends Component<any, any> {
   App: FC = () => (
     <Fragment>
       <Switch>
-        <Route path={`/`} component={() => <div>id</div>} exact />
+        <Redirect from="/" to={`/${RouteEnums.DASHBOARD}`} exact />
+        <Route path={`/${RouteEnums.DASHBOARD}`} component={Dashboard} exact />
+        <Route path={`/${RouteEnums.Video}/:id`} component={VideoApp} exact />
+        <Route path={`/${RouteEnums.Premium}`} component={Premium} exact />
       </Switch>
     </Fragment>
   );
 
-  // componentDidMount() {
-  //   axios.interceptors.response.use(Response=>Response, (error: AxiosError) => {
-  //     const statusCode = error.response ? error.response.status : null;
-  //     if (statusCode === 500) {
-  //       alert("Internal Server Error");
-  //       this.setState({hasError:true})
-  //     }
-  
-  //     return Promise.reject(error);
-  //   });
-  // }
-
   render() {
-    const { user } = this.props;
-
-    return user ? <this.App /> : <this.Auth />;
-
+    return <this.App />;
   }
 }
 

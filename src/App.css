@@ -1,3 +1,5 @@
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
@@ -30,4 +32,52 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#container {
+  position: relative;
+}
+#image {
+  /* position: absolute; */
+  left: 0;
+  top: 0;
+  width: 319px;
+  height: 163px;
+  border-radius: 8px;
+}
+#text {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  left: 12px;
+  top: 120px;
+}
+
+.min {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  left: 262px;
+  top: 10px;
+}
+
+.dynamic{
+  width:110%;
+  padding: 0 !important;
+}
+
+.slick-list{
+  padding: 0 50px !important;
+}
+
+.site-card-wrapper {
+  display:flex;
+  padding: 40px;
+  min-height: 720px;
+  height:100%;
+  background-color: rgba(255, 0, 0, 0.2);
 }
